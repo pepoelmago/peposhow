@@ -1,0 +1,34 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Admin {
+  id        String   @id @default(uuid())
+  email     String   @unique
+  password  String   // Will be hashed
+  createdAt DateTime @default(now())
+}
+
+model Reservation {
+  id            String   @id @default(uuid())
+  date          DateTime
+  name          String
+  email         String
+  phone         String
+  status        String   @default("PENDING") // PENDING, CONFIRMED, REJECTED, CANCELLED
+  paymentStatus String   @default("PENDING") // PENDING, PAID
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+model BlockedDate {
+  id        String   @id @default(uuid())
+  date      DateTime @unique
+  reason    String?
+  createdAt DateTime @default(now())
+}

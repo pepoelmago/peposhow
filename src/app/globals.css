@@ -1,27 +1,26 @@
 :root {
+  /* Premium Light Theme Palette */
   --background: #ffffff;
   --foreground: #171717;
-}
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
+  --primary: #8a2be2;
+  /* BlueViolet - Keeping brand accent */
+  --primary-glow: rgba(138, 43, 226, 0.2);
+  --secondary: #00bfff;
 
-html,
-body {
-  max-width: 100vw;
-  overflow-x: hidden;
-}
+  --surface: #f8f9fa;
+  /* Very light gray for cards */
+  --surface-hover: #e9ecef;
+  --border: #dee2e6;
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  --success: #28a745;
+  --warning: #ffc107;
+  --error: #dc3545;
+
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+  --radius: 12px;
+  --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
 }
 
 * {
@@ -30,13 +29,240 @@ body {
   margin: 0;
 }
 
+html,
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+}
+
 a {
   color: inherit;
   text-decoration: none;
 }
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
+/* Utilities */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.glass-panel {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 2rem;
+  box-shadow: var(--shadow);
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--radius);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: none;
+  font-size: 1rem;
+}
+
+.btn-primary {
+  background: var(--primary);
+  color: white;
+  box-shadow: 0 4px 10px var(--primary-glow);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  opacity: 0.9;
+}
+
+.btn-secondary {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--foreground);
+}
+
+.btn-secondary:hover {
+  background: var(--surface-hover);
+}
+
+/* Calendar Grid Styles */
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 8px;
+  margin-top: 2rem;
+}
+
+.day-cell {
+  aspect-ratio: 1;
+  background: white;
+  border-radius: var(--radius);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s;
+  border: 1px solid var(--border);
+  position: relative;
+  font-size: 1.1rem;
+  font-weight: 500;
+  overflow: hidden;
+  /* Important for the slanted text */
+}
+
+.day-cell:hover:not(.disabled):not(.busy) {
+  background: var(--surface-hover);
+  border-color: var(--primary);
+}
+
+/* Busy / Reserved State - Yellow with Slanted Text */
+.day-cell.busy {
+  background: #fff9c4;
+  /* Light Yellow */
+  color: #b71c1c;
+  /* Dark Red text for contrast */
+  cursor: not-allowed;
+  border-color: #fbc02d;
+  font-size: 1rem;
+  /* Adjust number size */
+}
+
+.day-cell.busy::after {
+  content: 'RESERVADO';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(-45deg);
+  font-size: 0.6rem;
+  font-weight: 800;
+  color: rgba(183, 28, 28, 0.4);
+  letter-spacing: 1px;
+  width: 120%;
+  text-align: center;
+  pointer-events: none;
+  text-transform: uppercase;
+  z-index: 10;
+}
+
+.day-cell.pending {
+  background: #fff3e0;
+  /* Light Orange */
+  color: #e65100;
+  cursor: not-allowed;
+  border-color: #ffb74d;
+}
+
+.day-cell.selected {
+  background: var(--primary);
+  color: white;
+  box-shadow: 0 4px 10px var(--primary-glow);
+  border-color: var(--primary);
+}
+
+.day-cell.other-month {
+  opacity: 0.3;
+  pointer-events: none;
+  background: var(--surface);
+}
+
+.day-header {
+  text-align: center;
+  font-weight: bold;
+  color: #666;
+  padding-bottom: 0.5rem;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+}
+
+/* Modal */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  backdrop-filter: blur(5px);
+}
+
+.modal-content {
+  background: white;
+  padding: 2rem;
+  border-radius: var(--radius);
+  width: 90%;
+  max-width: 500px;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  animation: slideUp 0.3s ease;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+input,
+select,
+textarea {
+  width: 100%;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--foreground);
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: border-color 0.2s;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  outline: none;
+  border-color: var(--primary);
+  background: white;
+}
+
+.payment-mock {
+  background: #e0f2f1;
+  /* Light Teal */
+  color: #004d40;
+  padding: 1.5rem;
+  border-radius: 12px;
+  margin: 1.5rem 0;
+  text-align: center;
+  border: 1px solid #b2dfdb;
+}
+
+.bizum-logo {
+  color: #00897b;
+  font-weight: 800;
+  font-size: 1.8rem;
+  margin-bottom: 0.5rem;
+  display: block;
+}
+
+/* Mobile Responsive Tweaks */
+@media (max-width: 600px) {
+  .day-cell.busy::after {
+    font-size: 0.5rem;
+    /* Smaller text on mobile */
   }
 }
