@@ -115,23 +115,29 @@ export default function PublicCalendar() {
     }
 
     const monthName = new Intl.DateTimeFormat('es-ES', { month: 'long', year: 'numeric' }).format(currentDate)
+    // Capitalize month name
+    const monthNameCapitalized = monthName.charAt(0).toUpperCase() + monthName.slice(1)
 
     return (
-        <div className="glass-panel">
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
-                <button onClick={handlePrevMonth} className="btn btn-secondary">&lt;</button>
-                <h2 style={{ textTransform: 'capitalize' }}>{monthName}</h2>
-                <button onClick={handleNextMonth} className="btn btn-secondary">&gt;</button>
+        <div>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
+                <button onClick={handlePrevMonth} className="btn btn-secondary">
+                    <i className="fas fa-chevron-left"></i> Anterior
+                </button>
+                <h2 style={{ fontSize: '1.5rem', color: '#2c3e50' }}>{monthNameCapitalized}</h2>
+                <button onClick={handleNextMonth} className="btn btn-secondary">
+                    Siguiente <i className="fas fa-chevron-right"></i>
+                </button>
             </div>
 
             <div className="calendar-grid">
-                <div className="day-header">L</div>
-                <div className="day-header">M</div>
-                <div className="day-header">X</div>
-                <div className="day-header">J</div>
-                <div className="day-header">V</div>
-                <div className="day-header">S</div>
-                <div className="day-header">D</div>
+                <div className="day-header">Lun</div>
+                <div className="day-header">Mar</div>
+                <div className="day-header">Mié</div>
+                <div className="day-header">Jue</div>
+                <div className="day-header">Vie</div>
+                <div className="day-header">Sáb</div>
+                <div className="day-header">Dom</div>
                 {days}
             </div>
 
