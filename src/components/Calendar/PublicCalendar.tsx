@@ -120,13 +120,13 @@ export default function PublicCalendar() {
 
     return (
         <div>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
-                <button onClick={handlePrevMonth} className="btn btn-secondary">
-                    <i className="fas fa-chevron-left"></i> Anterior
+            <div className="calendar-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem', gap: '10px' }}>
+                <button onClick={handlePrevMonth} className="btn btn-secondary" style={{ padding: '8px 12px', fontSize: '0.9rem' }}>
+                    <i className="fas fa-chevron-left"></i>
                 </button>
-                <h2 style={{ fontSize: '1.5rem', color: '#2c3e50' }}>{monthNameCapitalized}</h2>
-                <button onClick={handleNextMonth} className="btn btn-secondary">
-                    Siguiente <i className="fas fa-chevron-right"></i>
+                <h2 style={{ fontSize: '1.3rem', color: '#2c3e50', textAlign: 'center', flex: 1 }}>{monthNameCapitalized}</h2>
+                <button onClick={handleNextMonth} className="btn btn-secondary" style={{ padding: '8px 12px', fontSize: '0.9rem' }}>
+                    <i className="fas fa-chevron-right"></i>
                 </button>
             </div>
 
@@ -151,7 +151,7 @@ export default function PublicCalendar() {
                     <span>Reservado</span>
                 </div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
-                    <div className="day-cell pending" style={{ width: '20px', height: '20px', backgroundColor: '#fff3e0', border: '1px solid orange', cursor: 'default' }}></div>
+                    <div className="day-cell pending" style={{ width: '20px', height: '20px', backgroundColor: '#ffd54f', border: '1px solid #ffa000', cursor: 'default' }}></div>
                     <span>Pendiente</span>
                 </div>
             </div>

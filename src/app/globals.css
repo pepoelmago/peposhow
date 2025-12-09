@@ -320,3 +320,23 @@ textarea:focus {
   border-color: orange;
   color: #e65100;
 }
+
+/* Color contrast fix */
+.day-cell.busy {
+  background: #ffcdd2; /* Red-ish background for reserved */
+  border-color: #d32f2f;
+  color: #b71c1c;
+}
+
+.day-cell.pending {
+  background: #fff9c4; /* Distinct yellow for pending */
+  border-color: #fbc02d;
+  color: #f57f17;
+}
+
+/* Mobile header fix ensuring buttons don't break layout */
+@media (max-width: 480px) {
+    .calendar-header h2 {
+        font-size: 1.1rem !important;
+    }
+}
