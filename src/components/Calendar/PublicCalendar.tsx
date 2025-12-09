@@ -141,6 +141,21 @@ export default function PublicCalendar() {
                 {days}
             </div>
 
+            <div style={{ marginTop: '20px', display: 'flex', gap: '15px', justifyContent: 'center', flexWrap: 'wrap', fontSize: '0.9rem' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
+                    <div className="day-cell" style={{ width: '20px', height: '20px', cursor: 'default' }}></div>
+                    <span>Libre</span>
+                </div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
+                    <div className="day-cell busy" style={{ width: '20px', height: '20px', cursor: 'default' }}></div>
+                    <span>Reservado</span>
+                </div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
+                    <div className="day-cell pending" style={{ width: '20px', height: '20px', backgroundColor: '#fff3e0', border: '1px solid orange', cursor: 'default' }}></div>
+                    <span>Pendiente</span>
+                </div>
+            </div>
+
             {selectedDate && (
                 <BookingForm selectedDate={selectedDate} onClose={() => setSelectedDate(null)} />
             )}

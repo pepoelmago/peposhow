@@ -246,3 +246,77 @@ textarea:focus {
   margin-bottom: 25px;
   text-align: center;
 }
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  body {
+    padding: 10px;
+  }
+
+  .container {
+    width: 100%;
+    padding: 0;
+  }
+
+  header h1 {
+    font-size: 2rem !important;
+  }
+
+  header p {
+    font-size: 1rem !important;
+    padding: 0 10px;
+  }
+
+  .calendar-grid {
+    gap: 4px;
+  }
+
+  .day-cell {
+    font-size: 0.9rem;
+    border-radius: 6px;
+  }
+
+  .day-cell.busy::after {
+    font-size: 0.45rem;
+    letter-spacing: 0;
+    width: 140%;
+  }
+
+  .day-header {
+    font-size: 0.7rem;
+  }
+
+  .booking-steps {
+    gap: 8px;
+    margin: 20px 0;
+  }
+
+  .step {
+    min-width: 70px;
+    padding: 8px;
+    flex: 1; 
+  }
+
+  .step i {
+    font-size: 16px;
+    margin-bottom: 5px;
+  }
+
+  .step h4 {
+    font-size: 0.8rem;
+  }
+  
+  .step p {
+    display: none; 
+  }
+
+  .modal-content {
+    padding: 20px;
+    width: 95%;
+  }
+}
+
+.day-cell.pending {
+  background: #fff3e0;
+  border-color: orange;
+  color: #e65100;
+}
